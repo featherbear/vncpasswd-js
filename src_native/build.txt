@@ -1,0 +1,9 @@
+# Emscripten
+# emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.24 (68a9f990429e0bcfb63b1cde68bad792554350a5)
+# clang version 16.0.0 (https://github.com/llvm/llvm-project 277c382760bf9575cfa2eac73d5ad1db91466d3f)
+# Target: wasm32-unknown-emscripten
+# Thread model: posix
+emcc -s EXPORTED_FUNCTIONS=_deskey,_des -O3 --no-entry -o d3des.wasm lib/tightvnc/vnc_unixsrc/libvncauth/d3des.c
+
+# Zig
+zig cc -target wasm32-freestanding --shared -o d3des.wasm -Wl,--export=deskey,--export=des lib/tightvnc/vnc_unixsrc/libvncauth/d3des.c

@@ -1,0 +1,3 @@
+[submodule "src_native/lib/tightvnc"]
+	path = src_native/lib/tightvnc
+	url = https://github.com/featherbear/tightvnc
