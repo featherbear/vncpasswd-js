@@ -1,0 +1,8 @@
+{
+  "name": "vncpasswd-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/featherbear/vncpasswd-js.git",
+  "author": "Andrew Wong <andrew.j.wong@outlook.com>",
+  "license": "MIT"
+}
