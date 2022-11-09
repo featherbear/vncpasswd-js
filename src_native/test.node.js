@@ -1,5 +1,5 @@
 const fs = require('fs');
-const wasmBuffer = fs.readFileSync('./d3des.wasm');
+const wasmBuffer = fs.readFileSync('../src/d3des.wasm');
 
 const s_fixedkey = [23, 82, 107, 6, 35, 78, 88, 7]
 
@@ -8,7 +8,7 @@ WebAssembly.instantiate(wasmBuffer).then(wasmModule => {
     let dec = new TextDecoder()
 
     const { deskey, des, memory } = wasmModule.instance.exports;
-
+console.log(memory);
     let arr = new Uint8Array(memory.buffer)
 
 
