@@ -4,6 +4,11 @@
   "main": "dist/main.js",
   "repository": "https://github.com/featherbear/vncpasswd-js.git",
   "author": "Andrew Wong <andrew.j.wong@outlook.com>",
+  "scripts": {
+    "test": "sucrase-node test.ts",
+    "build": "tsc",
+    "install": "npm run build"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "16",
