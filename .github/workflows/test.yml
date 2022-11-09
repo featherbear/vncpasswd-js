@@ -1,0 +1,22 @@
+name: Code test
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+
+    - name: Install packages
+      run: yarn install
+
+    - name: Test code
+      run: yarn test
