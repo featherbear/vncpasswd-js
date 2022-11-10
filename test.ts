@@ -1,7 +1,6 @@
 import fs from 'fs'
 import load from './src/main'
 
-
     ; (async function () {
         console.log("Reading WASM file to memory")
         const wasm = fs.readFileSync('./src/d3des.wasm');

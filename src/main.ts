@@ -1,9 +1,13 @@
-export default async (wasmSource: BufferSource | WebAssembly.Instance) => {
-    let instance: WebAssembly.Instance
+interface ModuleInterface {
+    encrypt(password: string): number[]
+    decrypt(bytes: number[]): string
+}
+
+function load(wasmSource: WebAssembly.Instance): ModuleInterface
+function load(wasmSource: BufferSource): Promise<ModuleInterface>
+function load(wasmSource: BufferSource | WebAssembly.Instance) {
     if (!(wasmSource instanceof WebAssembly.Instance)) {
-        instance = await WebAssembly.instantiate(wasmSource).then(s => s.instance)
-    } else {
-        instance = wasmSource
+        return WebAssembly.instantiate(wasmSource).then(s => load(s.instance))
     }
 
     const s_fixedkey = [23, 82, 107, 6, 35, 78, 88, 7]
@@ -11,8 +15,8 @@ export default async (wasmSource: BufferSource | WebAssembly.Instance) => {
     let enc = new TextEncoder()
     let dec = new TextDecoder()
 
-    const { deskey, des }: { [fnName: string]: Function } = <any>instance.exports;
-    const { memory }: { memory: WebAssembly.Memory } = <any>instance.exports
+    const { deskey, des }: { [fnName: string]: Function } = <any>wasmSource.exports;
+    const { memory }: { memory: WebAssembly.Memory } = <any>wasmSource.exports
     let arr = new Uint8Array(memory.buffer)
 
     const work = (data: Uint8Array, mode: number) => {
@@ -38,3 +42,4 @@ export default async (wasmSource: BufferSource | WebAssembly.Instance) => {
     }
 }
 
+export default load
